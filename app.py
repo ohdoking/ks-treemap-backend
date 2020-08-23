@@ -1,14 +1,16 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from mock import *
 
 app = Flask(__name__)
-    
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 @app.route('/health')
 def health():
     return 'ok'
 
 # @app.route('/post', methods=['POST'])
-@app.route('/getGraphInfo')
+@app.route('/api/v1/getGraphInfo')
 def getGraphInfo():
 	type = request.args.get('type')
 	d = None
